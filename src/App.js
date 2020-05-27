@@ -4,13 +4,33 @@ import todosList from "./todos.json";
 class App extends Component {
   state = {
     todos: todosList,
+    newText: ""
   };
+
+  handleNewTodo = (event) => {
+    if (event.key === "enter") {
+      const newList = {
+        userId: 1,
+        id: Math.random(),
+        title: this.state.newText,
+        completed: false
+      }
+
+      upState = this.setState(state => ({
+        todos: [...state.todos, newList]
+      }));
+    }
+    console.log("Whatever")
+  }
+
+
+
   render() {
     return (
       <section className="todoapp">
         <header className="header">
           <h1>todos</h1>
-          <input className="new-todo" placeholder="What needs to be done?" autofocus />
+          <input className="new-todo" placeholder="What needs to be done?" onKeyDown={this.handleNewTodo} onChange={this.handleNewTodo} value={this.handleNewTodo} autofocus />
         </header>
         <TodoList todos={this.state.todos} />
         <footer className="footer">
@@ -41,6 +61,7 @@ class TodoItem extends Component {
 class TodoList extends Component {
   render() {
     return (
+
       <section className="main">
         <ul className="todo-list">
           {this.props.todos.map((todo) => (
