@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import todosList from "./todos.json";
-
+// site : Joseph Padgett helped me to understand handleChkToggle
 class App extends Component {
   state = {
     todos: todosList,
@@ -126,11 +126,11 @@ class TodoList extends Component {
         <ul className="todo-list">
           {this.props.todos.map((todo) => (
             <TodoItem
-              // site key={todo.id} was suggested to use because of warning being thrown(Joseph )
+              // site key={todo.id} was suggested to use because of warning being thrown(Joseph Padgett)
               key={todo.id}
+              id={todo.id}
               title={todo.title}
               completed={todo.completed}
-              id={todo.id}
               handleChkToggle={this.props.handleChkToggle}
               handleRemoveChk={this.props.handleRemoveChk}
               handleDelete={event =>
