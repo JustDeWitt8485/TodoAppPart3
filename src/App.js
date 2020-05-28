@@ -8,16 +8,18 @@ class App extends Component {
   };
 
   handleNewTodo = (event) => {
-    if (event.key === "enter") {
+    if (event.key === "Enter") {
       const newList = {
         userId: 1,
         id: Math.random(),
         title: event.target.value,
         completed: false
       }
-      const updateArr = this.state.todos.slice()
-      updateArr[updateArr.length] = newList;
-      this.setState({ todos: updateArr })
+
+      this.setState(state => ({
+        todos: [...state.todos, newList]
+      }));
+
       event.target.value = ""
     }
     console.log(this.state)
@@ -68,16 +70,16 @@ class App extends Component {
         </header>
         <TodoList
           todos={this.state.todos}
-          handleToggleComplete={this.handleChkToggle}
-          handleDeleteTodo={this.handleDelete}
-          handleRemoveChecked={this.handleRemoveChk}
+          handleChkToggle={this.handleChkToggle}
+          handleDelete={this.handleDelete}
+          handleRemoveChk={this.handleRemoveChk}
         />
         <footer className="footer">
           <span className="todo-count">
             <strong>0</strong> item(s) left
           </span>
           <button className="clear-completed"
-            onClick={event => this.handleRemoveChecked()}
+            onClick={event => this.handleRemoveChk()}
           >Clear completed</button>
         </footer>
       </section>
@@ -90,9 +92,17 @@ class TodoItem extends Component {
     return (
       <li className={this.props.completed ? "completed" : ""}>
         <div className="view">
-          <input className="toggle" type="checkbox" checked={this.props.completed} onChange={this.handleNewTodo} />
+          <input
+            className="toggle"
+            type="checkbox"
+            checked={this.props.completed}
+            onChange={event =>
+              this.props.handleChkToggle(event, this.props.id)
+            }
+          />
           <label>{this.props.title}</label>
-          <button className="destroy" />
+          <button className="destroy"
+            onClick={this.props.handleDelete} />
         </div>
       </li>
     );
@@ -106,7 +116,17 @@ class TodoList extends Component {
       <section className="main">
         <ul className="todo-list">
           {this.props.todos.map((todo) => (
-            <TodoItem title={todo.title} completed={todo.completed} />
+            <TodoItem
+              key={todo.id}
+              title={todo.title}
+              completed={todo.completed}
+              id={todo.id}
+              handleChkToggle={this.props.handleChkToggle}
+              handleRemoveChk={this.props.handleRemoveChk}
+              handleDelete={event =>
+                this.props.handleDelete(event, todo.id)
+              }
+            />
           ))}
         </ul>
       </section>
