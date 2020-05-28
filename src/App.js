@@ -35,7 +35,10 @@ class App extends Component {
 
       return item
     })
-    this.setState({ updateCompArr })
+    // this.setState(state => ({
+    //   todos: [...state.todos, updateCompArr]
+    // }));
+    this.setState( state => ({todos: updateCompArr  }))
   }
 
   handleRemoveChk = (event) => {
@@ -45,7 +48,10 @@ class App extends Component {
       }
       return true
     })
-    this.setState({ todos: checkedToRemove })
+    // this.setState(state => ({
+    //   todos:checkedToRemove 
+    // }));
+    this.setState(state =>({ todos: checkedToRemove }))
   }
 
   handleDelete = (event, itemsToDelete) => {
@@ -55,7 +61,10 @@ class App extends Component {
       }
       return true;
     });
-    this.setState({ todos: filteredArray });
+    // this.setState(state => ({
+    //  todos:filteredArray
+    // }));
+    this.setState(state =>({ todos: filteredArray }));
   };
 
 
