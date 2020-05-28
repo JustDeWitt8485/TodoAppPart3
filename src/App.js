@@ -12,16 +12,50 @@ class App extends Component {
       const newList = {
         userId: 1,
         id: Math.random(),
-        title: this.state.newText,
+        title: event.target.value,
         completed: false
       }
-
-      upState = this.setState(state => ({
-        todos: [...state.todos, newList]
-      }));
+      const updateArr = this.state.todos.slice()
+      updateArr[updateArr.length] = newList;
+      this.setState({ todos: updateArr })
+      event.target.value = ""
     }
+    console.log(this.state)
     console.log("Whatever")
   }
+
+  handleChkToggle = (event, itemToToggle) => {
+    const updateArrCk = this.state.todos.slice()
+    const updateCompArr = updateArrCk.map(item => {
+      if (itemToToggle === item.id) {
+        item.completed = !item.completed
+      }
+
+      return item
+    })
+    this.setState({ updateCompArr })
+  }
+
+  handleRemoveChk = (event) => {
+    const checkedToRemove = this.state.todos.filter(item => {
+      if (item.completed === true) {
+        return false
+      }
+      return true
+    })
+    this.setState({ todos: checkedToRemove })
+  }
+
+  handleDelete = (event, itemsToDelete) => {
+    const filteredArray = this.state.todos.filter(item => {
+      if (item.id === itemsToDelete) {
+        return false;
+      }
+      return true;
+    });
+    this.setState({ todos: filteredArray });
+  };
+
 
 
 
@@ -30,14 +64,21 @@ class App extends Component {
       <section className="todoapp">
         <header className="header">
           <h1>todos</h1>
-          <input className="new-todo" placeholder="What needs to be done?" onKeyDown={this.handleNewTodo} onChange={this.handleNewTodo} value={this.handleNewTodo} autofocus />
+          <input className="new-todo" placeholder="What needs to be done?" onKeyDown={this.handleNewTodo} autoFocus />
         </header>
-        <TodoList todos={this.state.todos} />
+        <TodoList
+          todos={this.state.todos}
+          handleToggleComplete={this.handleChkToggle}
+          handleDeleteTodo={this.handleDelete}
+          handleRemoveChecked={this.handleRemoveChk}
+        />
         <footer className="footer">
           <span className="todo-count">
             <strong>0</strong> item(s) left
           </span>
-          <button className="clear-completed">Clear completed</button>
+          <button className="clear-completed"
+            onClick={event => this.handleRemoveChecked()}
+          >Clear completed</button>
         </footer>
       </section>
     );
@@ -49,7 +90,7 @@ class TodoItem extends Component {
     return (
       <li className={this.props.completed ? "completed" : ""}>
         <div className="view">
-          <input className="toggle" type="checkbox" checked={this.props.completed} />
+          <input className="toggle" type="checkbox" checked={this.props.completed} onChange={this.handleNewTodo} />
           <label>{this.props.title}</label>
           <button className="destroy" />
         </div>
