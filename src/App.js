@@ -14,51 +14,51 @@ class App extends Component {
         id: Math.random(),
         title: event.target.value,
         completed: false
-      }
+      };
 
       this.setState(state => ({
         todos: [...state.todos, newList]
       }));
 
       event.target.value = ""
-    }
+    };
     console.log(this.state)
     console.log("Whatever")
-  }
+  };
 
   handleChkToggle = (event, itemToToggle) => {
     const updateArrCk = this.state.todos.slice()
     const updateCompArr = updateArrCk.map(item => {
       if (itemToToggle === item.id) {
         item.completed = !item.completed
-      }
+      };
 
       return item
-    })
+    });
     // this.setState(state => ({
     //   todos: [...state.todos, updateCompArr]
     // }));
-    this.setState( state => ({todos: updateCompArr  }))
-  }
+    this.setState( state => ({todos: updateCompArr  }));
+  };
 
   handleRemoveChk = (event) => {
     const checkedToRemove = this.state.todos.filter(item => {
       if (item.completed === true) {
         return false
-      }
+      };
       return true
-    })
+    });
     // this.setState(state => ({
     //   todos:checkedToRemove 
     // }));
     this.setState(state =>({ todos: checkedToRemove }))
-  }
+  };
 
   handleDelete = (event, itemsToDelete) => {
     const filteredArray = this.state.todos.filter(item => {
       if (item.id === itemsToDelete) {
         return false;
-      }
+      };
       return true;
     });
     // this.setState(state => ({
@@ -93,8 +93,8 @@ class App extends Component {
         </footer>
       </section>
     );
-  }
-}
+  };
+};
 
 class TodoItem extends Component {
   render() {
@@ -115,8 +115,8 @@ class TodoItem extends Component {
         </div>
       </li>
     );
-  }
-}
+  };
+};
 
 class TodoList extends Component {
   render() {
@@ -126,6 +126,7 @@ class TodoList extends Component {
         <ul className="todo-list">
           {this.props.todos.map((todo) => (
             <TodoItem
+              // site key={todo.id} was suggested to use because of warning being thrown(Joseph )
               key={todo.id}
               title={todo.title}
               completed={todo.completed}
@@ -136,11 +137,11 @@ class TodoList extends Component {
                 this.props.handleDelete(event, todo.id)
               }
             />
-          ))}
+          ))};
         </ul>
       </section>
     );
-  }
-}
+  };
+};
 
 export default App;
