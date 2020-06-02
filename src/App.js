@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import todosList from "./todos.json";
 import TodoList from "./components/todolist/TodoList"
-import { Route, Switch } from "react-router-dom";
+import { Route, Link} from "react-router-dom";
 // site : Joseph Padgett helped me to understand handleChkToggle
 class App extends Component {
   state = {
@@ -85,21 +85,23 @@ class App extends Component {
           {/* <!-- This should be `0 items left` by default --> */}
           <span className="todo-count">
             <strong>0</strong> item(s) left
-          </span>
-          <Switch>
-          <ul className="filters">
-            <li>
-              <a href="/">All</a>
-            </li>
-            <li>
-              <a href="/active">Active</a>
-            </li>
-            <li>
-              <a href="/completed">Completed</a>
-            </li>
-          </ul>
-          </Switch>
-          <button className="clear-completed">Clear completed</button>
+  </span>
+          <Route>
+            <ul className="filters">
+              <li>
+                <Link to="/">All</Link>
+              </li>
+              <li>
+                <Link to="/active">Active</Link>
+              </li>
+              <li>
+                <Link to="/completed">Completed</Link>
+              </li>
+            </ul>
+            </Route>
+            <button className="clear-completed"
+              onClick={event => this.handleRemoveChk()}
+            >Clear completed</button>
         </footer>
       </section>
     );
@@ -111,11 +113,3 @@ class App extends Component {
 
 export default App;
 
-{/* <footer className="footer">
-  <span className="todo-count">
-    <strong>0</strong> item(s) left
-  </span>
-  <button className="clear-completed"
-    onClick={event => this.handleRemoveChk()}
-  >Clear completed</button>
-</footer> */}
