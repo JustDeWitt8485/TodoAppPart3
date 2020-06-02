@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import todosList from "./todos.json";
 import TodoList from "./components/todolist/TodoList"
+import { Route, Switch } from "react-router-dom";
 // site : Joseph Padgett helped me to understand handleChkToggle
 class App extends Component {
   state = {
@@ -39,7 +40,7 @@ class App extends Component {
     // this.setState(state => ({
     //   todos: [...state.todos, updateCompArr]
     // }));
-    this.setState( state => ({todos: updateCompArr  }));
+    this.setState(state => ({ todos: updateCompArr }));
   };
 
   handleRemoveChk = () => {
@@ -49,10 +50,8 @@ class App extends Component {
       };
       return true
     });
-    // this.setState(state => ({
-    //   todos:checkedToRemove 
-    // }));
-    this.setState(state =>({ todos: checkedToRemove }))
+
+    this.setState(state => ({ todos: checkedToRemove }))
   };
 
   handleDelete = (event, itemsToDelete) => {
@@ -62,10 +61,8 @@ class App extends Component {
       };
       return true;
     });
-    // this.setState(state => ({
-    //  todos:filteredArray
-    // }));
-    this.setState(state =>({ todos: filteredArray }));
+
+    this.setState(state => ({ todos: filteredArray }));
   };
 
 
@@ -85,12 +82,24 @@ class App extends Component {
           handleRemoveChk={this.handleRemoveChk}
         />
         <footer className="footer">
+          {/* <!-- This should be `0 items left` by default --> */}
           <span className="todo-count">
             <strong>0</strong> item(s) left
           </span>
-          <button className="clear-completed"
-            onClick={event => this.handleRemoveChk()}
-          >Clear completed</button>
+          <Switch>
+          <ul className="filters">
+            <li>
+              <a href="/">All</a>
+            </li>
+            <li>
+              <a href="/active">Active</a>
+            </li>
+            <li>
+              <a href="/completed">Completed</a>
+            </li>
+          </ul>
+          </Switch>
+          <button className="clear-completed">Clear completed</button>
         </footer>
       </section>
     );
@@ -101,3 +110,12 @@ class App extends Component {
 
 
 export default App;
+
+{/* <footer className="footer">
+  <span className="todo-count">
+    <strong>0</strong> item(s) left
+  </span>
+  <button className="clear-completed"
+    onClick={event => this.handleRemoveChk()}
+  >Clear completed</button>
+</footer> */}
