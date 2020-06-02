@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import todosList from "./todos.json";
+import TodoList from "./components/todolist/TodoList"
 // site : Joseph Padgett helped me to understand handleChkToggle
 class App extends Component {
   state = {
@@ -77,6 +78,7 @@ class App extends Component {
           <h1>todos</h1>
           <input className="new-todo" placeholder="What needs to be done?" onKeyDown={this.handleNewTodo} autoFocus />
         </header>
+        TodoItem/>
         <TodoList
           todos={this.state.todos}
           handleChkToggle={this.handleChkToggle}
@@ -95,53 +97,53 @@ class App extends Component {
     );
   };
 };
+// class TodoItem extends Component {
+//   render() {
+//     return (
+//       <li className={this.props.completed ? "completed" : ""}>
+//         <div className="view">
+//           <input
+//             className="toggle"
+//             type="checkbox"
+//             checked={this.props.completed}
+//             onChange={event =>
+//               this.props.handleChkToggle(event, this.props.id)
+//             }
+//           />
+//           <label>{this.props.title}</label>
+//           <button className="destroy"
+//             onClick={this.props.handleDelete} />
+//         </div>
+//       </li>
+//     );
+//   };
+// };
 
-class TodoItem extends Component {
-  render() {
-    return (
-      <li className={this.props.completed ? "completed" : ""}>
-        <div className="view">
-          <input
-            className="toggle"
-            type="checkbox"
-            checked={this.props.completed}
-            onChange={event =>
-              this.props.handleChkToggle(event, this.props.id)
-            }
-          />
-          <label>{this.props.title}</label>
-          <button className="destroy"
-            onClick={this.props.handleDelete} />
-        </div>
-      </li>
-    );
-  };
-};
 
-class TodoList extends Component {
-  render() {
-    return (
+// class TodoList extends Component {
+//   render() {
+//     return (
 
-      <section className="main">
-        <ul className="todo-list">
-          {this.props.todos.map((todo) => (
-            <TodoItem
-              // site key={todo.id} was suggested to use because of warning being thrown(Joseph Padgett)
-              key={todo.id}
-              id={todo.id}
-              title={todo.title}
-              completed={todo.completed}
-              handleChkToggle={this.props.handleChkToggle}
-              handleRemoveChk={this.props.handleRemoveChk}
-              handleDelete={event =>
-                this.props.handleDelete(event, todo.id)
-              }
-            />
-          ))};
-        </ul>
-      </section>
-    );
-  };
-};
+//       <section className="main">
+//         <ul className="todo-list">
+//           {this.props.todos.map((todo) => (
+//             <TodoItem
+//               // site key={todo.id} was suggested to use because of warning being thrown(Joseph Padgett)
+//               key={todo.id}
+//               id={todo.id}
+//               title={todo.title}
+//               completed={todo.completed}
+//               handleChkToggle={this.props.handleChkToggle}
+//               handleRemoveChk={this.props.handleRemoveChk}
+//               handleDelete={event =>
+//                 this.props.handleDelete(event, todo.id)
+//               }
+//             />
+//           ))};
+//         </ul>
+//       </section>
+//     );
+//   };
+// };
 
 export default App;
