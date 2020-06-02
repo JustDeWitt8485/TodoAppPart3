@@ -27,7 +27,7 @@ class App extends Component {
     console.log("Whatever")
   };
 
-  handleChkToggle = (event, itemToToggle) => {
+  handleChkToggle = (itemToToggle) => {
     const updateArrCk = this.state.todos.slice()
     const updateCompArr = updateArrCk.map(item => {
       if (itemToToggle === item.id) {
@@ -39,10 +39,10 @@ class App extends Component {
     // this.setState(state => ({
     //   todos: [...state.todos, updateCompArr]
     // }));
-    this.setState( state => ({todos: updateCompArr  }));
+    this.setState( state => ({ todos: updateCompArr  }));
   };
 
-  handleRemoveChk = (event) => {
+  handleRemoveChk = () => {
     const checkedToRemove = this.state.todos.filter(item => {
       if (item.completed === true) {
         return false
@@ -55,7 +55,7 @@ class App extends Component {
     this.setState(state =>({ todos: checkedToRemove }))
   };
 
-  handleDelete = (event, itemsToDelete) => {
+  handleDelete = (itemsToDelete) => {
     const filteredArray = this.state.todos.filter(item => {
       if (item.id === itemsToDelete) {
         return false;
