@@ -1,9 +1,6 @@
 import React, { Component } from "react"
 
 class TodoItem extends Component {
-    constructor(props){
-        super(props)
-    }
     render() {
         return (
             <li className={this.props.completed ? "completed" : ""}>
@@ -26,4 +23,3 @@ class TodoItem extends Component {
 };
 
 export default TodoItem
-

@@ -1,13 +1,11 @@
-import React, {Component} from "react"
-import TodoItem from "./todoitem/TodoItem"
+import React, { Component } from "react"
+import TodoItem from "../todoitem/TodoItem"
 
 
 class TodoList extends Component {
-    constructor(props){
-        super(props)
-    }
     render() {
         return (
+
             <section className="main">
                 <ul className="todo-list">
                     {this.props.todos.map((todo) => (
@@ -29,5 +27,6 @@ class TodoList extends Component {
         );
     };
 };
+
 
 export default TodoList
