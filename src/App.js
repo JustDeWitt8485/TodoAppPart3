@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import todosList from "./todos.json";
 import TodoList from "./components/todolist/TodoList"
-import { Route, Link} from "react-router-dom";
+import { Route, Link, } from "react-router-dom";
 // site : Joseph Padgett helped me to understand handleChkToggle
 class App extends Component {
   state = {
@@ -75,33 +75,65 @@ class App extends Component {
           <h1>todos</h1>
           <input className="new-todo" placeholder="What needs to be done?" onKeyDown={this.handleNewTodo} autoFocus />
         </header>
-        <TodoList
-          todos={this.state.todos}
-          handleChkToggle={this.handleChkToggle}
-          handleDelete={this.handleDelete}
-          handleRemoveChk={this.handleRemoveChk}
-        />
+        <Route exact path="/" render={() =>
+          <TodoList
+            todos={this.state.todos}
+            handleChkToggle={this.handleChkToggle}
+            handleDelete={this.handleDelete}
+            handleRemoveChk={this.handleRemoveChk}
+          />
+        }>
+        </Route>
+        <Route path="/active" render={() => (
+          <TodoList
+            todos={this.state.todos.filter(active => {
+              if (true === active.completed) {
+                return false
+              };
+              return true;
+            })}
+            handleChkToggle={this.handleChkToggle}
+            handleDelete={this.handleDelete}
+            handleRemoveChk={this.handleRemoveChk}
+          />
+        )}>
+        </Route>
+
+        <Route path="/completed" render={() => (
+          <TodoList
+            todos={this.state.todos.filter(completed => {
+              if (true !== completed.completed) {
+                return false
+              }
+              return true;
+            })}
+            handleChkToggle={this.handleChkToggle}
+            handleDelete={this.handleDelete}
+            handleRemoveChk={this.handleRemoveChk}
+          />
+        )}>
+        </Route>
+
         <footer className="footer">
           {/* <!-- This should be `0 items left` by default --> */}
           <span className="todo-count">
             <strong>0</strong> item(s) left
-  </span>
-          <Route>
-            <ul className="filters">
-              <li>
-                <Link to="/">All</Link>
-              </li>
-              <li>
-                <Link to="/active">Active</Link>
-              </li>
-              <li>
-                <Link to="/completed">Completed</Link>
-              </li>
-            </ul>
-            </Route>
-            <button className="clear-completed"
-              onClick={event => this.handleRemoveChk()}
-            >Clear completed</button>
+          </span>
+
+          <ul className="filters">
+            <li>
+              <Link to="/">All</Link>
+            </li>
+            <li>
+              <Link to="/active">Active</Link>
+            </li>
+            <li>
+              <Link to="/completed">Completed</Link>
+            </li>
+          </ul>
+          <button className="clear-completed"
+            onClick={event => this.handleRemoveChk()}
+          >Clear completed</button>
         </footer>
       </section>
     );

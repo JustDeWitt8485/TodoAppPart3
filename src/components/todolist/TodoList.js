@@ -8,7 +8,7 @@ class TodoList extends Component {
 
             <section className="main">
                 <ul className="todo-list">
-                    {this.props.todos.map((todo) => (
+                    {this.props.todos.map(todo => (
                         <TodoItem
                             // site key={todo.id} was suggested to use because of warning being thrown(Joseph Padgett)
                             key={todo.id}
