@@ -308,11 +308,15 @@ body {
 
 .filters li a:hover {
   border-color: rgba(175, 47, 47, 0.1);
+  
 }
 
 .filters li a.selected {
-  border-color: rgba(175, 47, 47, 0.2);
-}
+  border-color:rgba(175, 47, 47, 0.2);
+  background-color: darkblue;
+  
+  
+  }
 
 .clear-completed,
 html .clear-completed:active {

@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import todosList from "./todos.json";
 import TodoList from "./components/todolist/TodoList"
-import { Route, Link, } from "react-router-dom";
+import { Route, NavLink } from "react-router-dom";
 // site : Joseph Padgett helped me to understand handleChkToggle
 class App extends Component {
   state = {
@@ -119,16 +119,16 @@ class App extends Component {
           <span className="todo-count">
             <strong>0</strong> item(s) left
           </span>
-
+          {/* Site: Stackoverflow documentation about NavLink */}
           <ul className="filters">
             <li>
-              <Link to="/">All</Link>
+              <NavLink to="/" exact activeStyle={{ color: "blue" }}>All</NavLink>
             </li>
             <li>
-              <Link to="/active">Active</Link>
+              <NavLink to="/active" exact activeStyle={{ color: "blue" }} >Active</NavLink>
             </li>
             <li>
-              <Link to="/completed">Completed</Link>
+              <NavLink to="/completed" exact activeStyle={{ color: "blue" }}>Completed</NavLink>
             </li>
           </ul>
           <button className="clear-completed"
