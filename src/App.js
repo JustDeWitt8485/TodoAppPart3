@@ -117,6 +117,7 @@ class App extends Component {
         <footer className="footer">
           {/* <!-- This should be `0 items left` by default --> */}
           <span className="todo-count" >
+            {/* TJ gave me a hint that helped me to understand the bigger idea for the count*/}
             <strong>0{this.state.todos.filter(todo => !todo.completed).length}</strong> item(s) left 
           </span>
           {/* Site: Stackoverflow documentation about NavLink */}
