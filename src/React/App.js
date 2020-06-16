@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import todosList from "./todos.json";
+import todosList from "../todos.json";
 import TodoList from "./components/todolist/TodoList"
 import { Route, NavLink } from "react-router-dom";
 // site : Joseph Padgett helped me to understand handleChkToggle
