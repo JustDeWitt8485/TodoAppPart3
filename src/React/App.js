@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import todosList from "../todos.json";
 import TodoList from "./components/todolist/TodoList"
 import { Route, NavLink } from "react-router-dom";
-// site : Joseph Padgett helped me to understand handleChkToggle
 class App extends Component {
   state = {
     todos: todosList,
@@ -37,9 +36,6 @@ class App extends Component {
 
       return item
     });
-    // this.setState(state => ({
-    //   todos: [...state.todos, updateCompArr]
-    // }));
     this.setState(state => ({ todos: updateCompArr }));
   };
 
@@ -115,12 +111,9 @@ class App extends Component {
         </Route>
 
         <footer className="footer">
-          {/* <!-- This should be `0 items left` by default --> */}
           <span className="todo-count" >
-            {/* TJ gave me a hint that helped me to understand the bigger idea for the count*/}
-            <strong>0{this.state.todos.filter(todo => !todo.completed).length}</strong> item(s) left 
+            <strong>0{this.state.todos.filter(todo => !todo.completed).length}</strong> item(s) left
           </span>
-          {/* Site: Stackoverflow documentation about NavLink */}
           <ul className="filters">
             <li>
               <NavLink to="/" exact activeStyle={{ color: "blue" }}>All</NavLink>
